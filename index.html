@@ -1,67 +1,79 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ভিডিও ল্যান্ডিং পেজ</title>
+    <title>Watch the Video</title>
 
-    <!-- Twitter/X Card Meta Tags (যাতে শেয়ার করলে ভিডিও autoplay হয়) -->
+    <!-- নিজের ওয়েবসাইটের ডোমেইন এখানে বসান (শেষে স্ল্যাশ / দেবেন না) -->
+    <!-- উদাহরণ: https://mysite.com -->
+    <!-- এই অংশটি খুবই গুরুত্বপূর্ণ, এটি ছাড়া টুইটারে ভিডিও লোড হবে না -->
+    <script>
+        // ইউজারকে ভেরিয়েবল হিসেবে ডোমেইন সেট করতে বলা হচ্ছে না, 
+        // সরাসরি মেটা ট্যাগে বসাতে হবে। নিচে দেখুন।
+    </script>
+
+    <!-- X/Twitter Player Card Meta Tags -->
     <meta name="twitter:card" content="player">
-    <meta name="twitter:site" content="@your_twitter_handle"> <!-- ঐচ্ছিক, আপনার টুইটার হ্যান্ডেল -->
-    <meta name="twitter:title" content="আকর্ষণীয় ভিডিও">
-    <meta name="twitter:description" content="এই ভিডিওটি দেখুন!">
-    <meta name="twitter:image" content="YOUR_THUMBNAIL_IMAGE_URL"> <!-- thumbnail image -->
-    <meta name="twitter:player" content="https://yourdomain.com/this-page-url"> <!-- এই পেজেরই URL (self reference) -->
-    <meta name="twitter:player:width" content="480">
-    <meta name="twitter:player:height" content="480">
-    <meta name="twitter:player:stream" content="YOUR_VIDEO_URL_HERE">
+    <meta name="twitter:site" content="@site_username">
+    <meta name="twitter:title" content="Tap to Continue Watching">
+    <meta name="twitter:description" content="Click the video to watch the full content">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj4QlkEB62xRXUyapvVP57WHq72oE2RG8EQd-Peyrz9Nujy40CY-WYb9e9X6kB4m0cIPXGPS49T0OZDVcKs1EPeKXkrY_sx-cwmOHEJtmTo2s0blvSmFE4pQ7wTwpEi7eep4yjriGViEwQ-JpGXgcGK2awfd44MUnLqaJy3xMeqBewkYw_JPiasZv_rOA/s709/Screenshot_2025-12-25-19-39-17-246_com.android.chrome.png">
+    
+    <!-- IMPORTANT: Replace 'https://YOUR_WEBSITE_LINK.com' with your actual URL -->
+    <!-- টুইটার বটের জন্য সরাসরি লিংক বসাতে হবে, JS দিয়ে কাজ হবে না -->
+    <meta name="twitter:player" content="https://YOUR_WEBSITE_LINK.com/index.html">
+    <meta name="twitter:player:width" content="1280">
+    <meta name="twitter:player:height" content="720">
+    
+    <!-- Video file must have full URL (https://...) -->
+    <meta name="twitter:player:stream" content="https://YOUR_WEBSITE_LINK.com/video.mp4">
     <meta name="twitter:player:stream:content_type" content="video/mp4">
 
-    <!-- Open Graph (অন্যান্য প্ল্যাটফর্মের জন্য) -->
-    <meta property="og:video" content="YOUR_VIDEO_URL_HERE">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Tap to Continue Watching">
+    <meta property="og:description" content="Click the video to watch the full content">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj4QlkEB62xRXUyapvVP57WHq72oE2RG8EQd-Peyrz9Nujy40CY-WYb9e9X6kB4m0cIPXGPS49T0OZDVcKs1EPeKXkrY_sx-cwmOHEJtmTo2s0blvSmFE4pQ7wTwpEi7eep4yjriGViEwQ-JpGXgcGK2awfd44MUnLqaJy3xMeqBewkYw_JPiasZv_rOA/s709/Screenshot_2025-12-25-19-39-17-246_com.android.chrome.png">
+    
+    <!-- Video file must have full URL -->
+    <meta property="og:video" content="https://YOUR_WEBSITE_LINK.com/video.mp4">
     <meta property="og:video:type" content="video/mp4">
-    <meta property="og:video:width" content="480">
-    <meta property="og:video:height" content="480">
-    <meta property="og:image" content="YOUR_THUMBNAIL_IMAGE_URL">
+    <meta property="og:video:width" content="1280">
+    <meta property="og:video:height" content="720">
+    <meta property="og:type" content="video.other">
 
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background: black;
-        }
-        video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* full cover */
-            cursor: pointer; /* ক্লিক করলে pointer দেখাবে */
-        }
+        body,html{margin:0;padding:0;height:100%;overflow:hidden;background:#000}
+        video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
+        .overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;background:rgba(0,0,0,0.4);font-family:Arial,sans-serif;text-align:center; pointer-events: none;} /* pointer-events none allows click to pass through to body/video */
+        .main-text{font-size:2.8rem;font-weight:bold;text-shadow:2px 2px 10px #000}
+        .sub-text{font-size:1.6rem;margin-top:10px;text-shadow:1px 1px 8px #000}
+        @media(max-width:768px){.main-text{font-size:2rem}.sub-text{font-size:1.2rem}}
     </style>
 </head>
 <body>
-    <video id="bgVideo" autoplay muted loop playsinline>
+    <video id="video" autoplay muted loop playsinline poster="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj4QlkEB62xRXUyapvVP57WHq72oE2RG8EQd-Peyrz9Nujy40CY-WYb9e9X6kB4m0cIPXGPS49T0OZDVcKs1EPeKXkrY_sx-cwmOHEJtmTo2s0blvSmFE4pQ7wTwpEi7eep4yjriGViEwQ-JpGXgcGK2awfd44MUnLqaJy3xMeqBewkYw_JPiasZv_rOA/s709/Screenshot_2025-12-25-19-39-17-246_com.android.chrome.png">
         <source src="video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
     </video>
 
-    <script>
-        const video = document.getElementById('bgVideo');
-        const redirectLink = 'YOUR_REDIRECT_LINK_HERE'; // চূড়ান্ত লিংক এখানে
+    <div class="overlay">
+        <div class="main-text">Tap to Continue</div>
+        <div class="sub-text">Click anywhere on the video</div>
+    </div>
 
-        video.addEventListener('click', function() {
+    <script>
+        const redirectLink = 'https://www.effectivegatecpm.com/ear3xi8s?key=205b93a2d6fb27186ab5dd2e2b375490';
+        
+        // Click event on the whole body
+        document.body.addEventListener('click', () => {
             window.location.href = redirectLink;
         });
-
-        // মোবাইলে autoplay নিশ্চিত করার জন্য (কিছু ব্রাউজারে দরকার)
-        video.play().catch(() => {
-            // যদি autoplay ব্লক হয় তাহলে silent play
-            video.muted = true;
-            video.play();
+        
+        const vid = document.getElementById('video');
+        // Attempt to play immediately
+        vid.play().catch(() => { 
+            vid.muted = true; 
+            vid.play(); 
         });
     </script>
 </body>
