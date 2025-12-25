@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভিডিও ল্যান্ডিং পেজ</title>
+
+    <!-- Twitter/X Card Meta Tags (যাতে শেয়ার করলে ভিডিও autoplay হয়) -->
+    <meta name="twitter:card" content="player">
+    <meta name="twitter:site" content="@your_twitter_handle"> <!-- ঐচ্ছিক, আপনার টুইটার হ্যান্ডেল -->
+    <meta name="twitter:title" content="আকর্ষণীয় ভিডিও">
+    <meta name="twitter:description" content="এই ভিডিওটি দেখুন!">
+    <meta name="twitter:image" content="YOUR_THUMBNAIL_IMAGE_URL"> <!-- thumbnail image -->
+    <meta name="twitter:player" content="https://yourdomain.com/this-page-url"> <!-- এই পেজেরই URL (self reference) -->
+    <meta name="twitter:player:width" content="480">
+    <meta name="twitter:player:height" content="480">
+    <meta name="twitter:player:stream" content="YOUR_VIDEO_URL_HERE">
+    <meta name="twitter:player:stream:content_type" content="video/mp4">
+
+    <!-- Open Graph (অন্যান্য প্ল্যাটফর্মের জন্য) -->
+    <meta property="og:video" content="YOUR_VIDEO_URL_HERE">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="480">
+    <meta property="og:video:height" content="480">
+    <meta property="og:image" content="YOUR_THUMBNAIL_IMAGE_URL">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: black;
+        }
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* full cover */
+            cursor: pointer; /* ক্লিক করলে pointer দেখাবে */
+        }
+    </style>
+</head>
+<body>
+    <video id="bgVideo" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        const video = document.getElementById('bgVideo');
+        const redirectLink = 'YOUR_REDIRECT_LINK_HERE'; // চূড়ান্ত লিংক এখানে
+
+        video.addEventListener('click', function() {
+            window.location.href = redirectLink;
+        });
+
+        // মোবাইলে autoplay নিশ্চিত করার জন্য (কিছু ব্রাউজারে দরকার)
+        video.play().catch(() => {
+            // যদি autoplay ব্লক হয় তাহলে silent play
+            video.muted = true;
+            video.play();
+        });
+    </script>
+</body>
+</html>
